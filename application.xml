@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<application xmlns="http://ns.adobe.com/air/application/2.0">
+	<filename>ZuhaDesktop</filename>
+	<programMenuFolder>ZuhaDesktop</programMenuFolder>
+	<copyright>2011 - RazorIT LLC - All Rights Reserved</copyright>
+	<description>A desktop component for the Zuha.com business collaboration system.</description>
+	<customUpdateUI>false</customUpdateUI>
+	<name>Zuha Desktop</name>
+	<id>ZuhaDesktop</id>
+	<version>1</version>
+	<initialWindow>
+		<content>index.html</content>
+		<height>400</height>
+		<width>443</width>
+		<systemChrome>none</systemChrome>
+		<transparent>true</transparent>
+		<visible>true</visible>
+	</initialWindow>
+	<icon>
+		<image128x128>images/128.png</image128x128>
+		<image48x48>images/48.png</image48x48>
+		<image32x32>images/32.png</image32x32>
+		<image16x16>images/16.png</image16x16>
+	</icon>
+</application>

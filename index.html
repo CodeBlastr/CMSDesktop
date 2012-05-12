@@ -1,0 +1,643 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+     "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>Zuha Desktop</title>
+<style type="text/css">
+/* jQuery Countdown styles 1.5.5. */
+body {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+.hasCountdown {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+.countdown_rtl {
+	direction: rtl;
+}
+.countdown_holding span {
+	background-color: #ccc;
+}
+.countdown_row {
+	clear: both;
+	width: 100%;
+	padding: 0px 2px;
+	text-align: center;
+}
+.countdown_show1 .countdown_section {
+	width: 98%;
+}
+.countdown_show2 .countdown_section {
+	width: 48%;
+}
+.countdown_show3 .countdown_section {
+	width: 32.5%;
+}
+.countdown_show4 .countdown_section {
+	width: 24.5%;
+}
+.countdown_show5 .countdown_section {
+	width: 19.5%;
+}
+.countdown_show6 .countdown_section {
+	width: 16.25%;
+}
+.countdown_show7 .countdown_section {
+	width: 14%;
+}
+.countdown_section {
+	display: block;
+	float: left;
+	font-size: 75%;
+	text-align: center;
+}
+.countdown_amount {
+	font-size: 100%;
+}
+.countdown_descr {
+	display: block;
+	width: 100%;
+}
+/* style of the timer elements */
+#background {
+	position: absolute;
+	top: 150px;
+	width: 427px;
+	height: 179px;
+	z-index: 3;
+	background: url(images/timer-background.png) no-repeat;
+}
+#defaultCountdown { 
+	width: 180px; 
+	height: 45px;
+	position: absolute;
+	top: 95px;
+	left: 15px;
+	font-size: 60px;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color: #C5F50A;
+	white-space: nowrap;
+}
+#defaultCountdown.blink {
+	color: #4E4E4E;
+	text-decoration: blink;
+}
+#projectsdropdown {
+	width: 290px;
+	position: absolute;
+	top: 45px;
+	left: 15px;
+	color: #999;
+	border: none;
+}
+#tasksdropdown {
+	width: 290px;
+	position: absolute;
+	top: 70px;
+	left: 15px;
+	color: #999;
+	border: none;
+}
+.playButton {
+	width: 88px;
+	height: 88px;
+	position: absolute;
+	top: 73px;
+	left: 320px;
+	background: url(images/btn_play.png) no-repeat;
+	border: none;
+	cursor: pointer;
+}
+/* for some reason this stopped working some times, and wasn't worth the effort to fix
+.playButton:hover {
+	background: url(images/btn_play.png) -88px 0px no-repeat;
+}*/
+.playButton:active {
+	background: url(images/btn_play.png) -88px 0px no-repeat;
+}
+.stopButton {
+	width: 88px;
+	height: 88px;
+	position: absolute;
+	top: 73px;
+	left: 320px;
+	background: url(images/btn_stop.png) no-repeat;
+	border: none;
+	cursor: pointer;
+}
+.stopButton:active {
+	background: url(images/btn_stop.png) -88px 0px no-repeat;
+}
+.stopDisabledButton {
+	width: 88px;
+	height: 88px;
+	position: absolute;
+	top: 73px;
+	left: 320px;
+	background: url(images/btn_disabled.png) no-repeat;
+	border: none;
+}	
+.pauseButton {
+	width: 52px;
+	height: 52px;
+	position: absolute;
+	top: 110px;
+	left: 260px;
+	background: url(images/btn_pause.png) no-repeat;
+	border: none;
+	cursor: pointer;
+}
+.pauseButton:active {
+	background: url(images/btn_pause.png) -52px 0px  no-repeat;
+}
+
+/* second sliding background */
+
+#sliderbackground {
+	width: 426px;
+	height: 204px;
+	position: relative;
+	/*position when adding top: -180px; */
+	top: 160px;
+	left: 1px;
+	background: url(images/bg_comments.png) no-repeat;
+}
+#timetrackedalready, #timeallocated {
+	font-weight: bold;
+}
+#timetrackedalready {
+	position: absolute;
+	top: 165px;
+	left: 230px;
+}
+#timeallocated {
+	position: absolute;
+	top: 165px;
+	left: 15px;
+}
+#taskDueDate {
+	color: #fff;
+	font-size: 10px;
+	text-align: center;
+	width: 90px;
+	position: absolute;
+	top: 35px;
+	left: 315px;
+	z-index: 1000;
+	display: none;
+}
+.labeltext {
+	font-weight: normal;
+	color: #999;
+}
+#cancelButton {
+	width: 120px;
+	height: 34px;
+	position: absolute;
+	top: 112px;
+	left: 15px;
+	background: url(images/btn_cancel.png) no-repeat;
+	border: none;
+	cursor: pointer;
+}
+#cancelButton:active {
+	background: url(images/btn_cancel.png) -118px 0px no-repeat;
+}
+#submitButton {
+	width: 119px;
+	height: 34px;
+	position: absolute;
+	top: 112px;
+	left: 285px;
+	background: url(images/btn_addtime.png) no-repeat;
+	border: none;
+	cursor: pointer;
+}
+#submitButton:active {
+	background: url(images/btn_addtime.png) -117px 0px no-repeat;
+}
+#commentslabel {
+	position: absolute;
+	top: 10px;
+	left: 15px;
+}
+#comments {
+	width: 380px;
+	height: 70px;
+	position: absolute; 
+	top: 30px;
+	left: 15px;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+#iscompletedlabel {
+	position: absolute;
+	top: 10px;
+	left: 121px;
+}
+#is_completed {
+	position: absolute; 
+	top: 10px;
+	left: 100px;
+}
+.info { 
+	display: block;
+    width:20px; 
+    height:20px; 
+	position: absolute;
+	top: 12px;
+	left: 299px;
+	z-index: 100;
+	cursor: pointer;
+} 
+.minimize { 
+	display: block;
+    width:20px; 
+    height:20px; 
+	position: absolute;
+	top: 12px;
+	left: 329px;
+	z-index: 100;
+	cursor: pointer;
+}
+.drag { 
+	display: block;
+    width:20px; 
+    height:20px; 
+	position: absolute;
+	top: 12px;
+	left: 359px;
+	z-index: 100;
+	cursor: move;
+}
+.drag2 { 
+	display: block;
+    width:280px; 
+    height:40px; 
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	z-index: 100;
+	cursor: move;
+}
+.close {
+	display: block;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 10px;
+	left: 387px;
+	z-index: 100;
+	cursor: pointer;
+}	
+#pauseButton { display: none; }
+#comments { }
+
+/* login form first */
+#login {
+	width: 427px;
+	height: 179px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 5;
+	background: url(images/timer-background.png) no-repeat;
+}
+#login table {
+	position: absolute;
+	top: 50px;
+	left: 30px;
+}
+#login a {
+	color: #6F6;
+	text-decoration: none;
+}
+#username, #password {
+	width: 250px;
+}
+#loading {
+	width: 100px; 
+	height: 100px;
+	background: url(images/loading.gif) no-repeat;
+	position: absolute;
+	top: 15px;
+	left: 160px;
+	z-index: 1000;
+	display: none;
+}
+
+</style>
+
+
+
+<script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="jquery-countdown.js"></script>
+<script type="text/javascript">
+//var serverpath = "http://razorit.localhost/";
+var serverpath = "http://www2.razorit.com/";
+
+function twoDigits(value) {
+	return (value < 10 ? '0' : '') + value;
+}
+
+	//<select name="projects" id="projectsdropdown" onchange="settasks(this.value)">
+
+$(function () {
+	// fill in the tasks drop down
+	$('#projectsdropdown').change(function() {
+		var projectId = $(this).val();
+		var userId = $("#user_id").val();
+		$("#loading").show();
+		$("#taskDueDate").hide();
+		$.ajax({
+		    url:serverpath+'tasks/tasks/desktop_index/'+projectId+'/'+userId,
+		    type: 'POST',
+		    data:'',			
+		    success: function(result){				
+				$("#tasksdropdown").html(result); 
+				$("#loading").hide();
+		    }
+		});
+	});	
+	
+	// ids to fill	trackedTime, allocatedTime
+	$('#tasksdropdown').change(function() {
+		var taskId = $(this).val();
+		$("#loading").show();
+		$.ajax({
+		    url:serverpath+'tasks/tasks/desktop_view/'+taskId,
+		    type: 'POST',
+		    data:'',			
+		    success: function(result){		
+				var hours = result.split("~");		
+				$("#trackedTime").text(hours[1]); 	
+				$("#allocatedTime").text(hours[0]); 
+				$("#taskDueDate").show();
+				$("#taskDueDate").text("Due: "+hours[2]);
+				$("#loading").hide();
+				if (parseFloat(hours[1]) > parseFloat(hours[0])) {	
+					$("#trackedTime").css({color: "red"});
+					$("#allocatedTime").css({color: "red"});
+			   } else {
+					$("#trackedTime").css({color: "black"});
+					$("#allocatedTime").css({color: "black"});
+			   }
+		    }
+		});
+	});	
+			
+	// logging in
+	$('#loginButton').click(function() {
+		var username=$('#username').val();		
+		var password=$('#password').val();
+		$("#loading").show();
+		$.ajax({
+		    url:serverpath+'users/users/desktop_login/',
+		    type: 'POST',
+		    data:'data[User][username]='+username+'&data[User][password]='+password,	
+		    success: function(result) {			    
+				if(result=="Fail"){	
+					var valid_message="Invalid username or password";
+					$('#message').html(valid_message);
+					$('#username').val('');
+					$('#password').val('');	
+					$("#loading").hide();
+					// used to see auth component problems
+					//$("#allocatedTime").text(result); 	
+				} else {
+					// used to see auth component problems
+					//$("#allocatedTime").text(result); 
+					$("#login").hide();
+					// result = the user id
+					$("#user_id").attr("value", result); 
+					$("#startButton").addClass('playButton');		
+					$.ajax({
+						// result = the user id	
+					    url:serverpath+'projects/projects/desktop_index/'+result,
+					    type: 'POST',
+					    data:'',						
+					    success: function(result){			    												
+							$("#projectsdropdown").html(result); 
+							$("#loading").hide();
+							// to see auth component problems
+							//$("#allocatedTime").text(result); 		
+					    }
+					});												
+				}
+		    }
+		});	
+	});	
+	// save the time
+	$('#submitButton').click(function() {
+		if ($("#tasksdropdown").val() < 1) {
+			alert('Please select an task.');
+			return false;
+		} else {
+			$("#loading").show();
+			var project_id = $("#projectsdropdown").val();
+			var task_id = $("#tasksdropdown").val();
+			var timerstart = $("#timerstart").val();
+			var timerend = $("#timerend").val();
+			var timervalue = $("#timervalue").val();
+			var timervalue = timervalue.split(":");
+			var hours = timervalue[0];
+			var minutes = timervalue[1]/60;
+			var seconds = timervalue[2];
+			var timervalue = parseFloat(hours)+parseFloat(minutes);
+			var comments = $("#comments").val();
+			var user_id = $("#user_id").val();
+			var is_completed = $("#is_completed").val();
+			$.ajax({
+			    url:serverpath+'timesheets/timesheet_times/desktop_add',
+			    type: 'POST',
+			    data:'timervalue='+timervalue+'&timerstart='+timerstart+'&timerend='+timerend+'&project_id='
+					+project_id+'&user_id='+user_id+'&task_id='+task_id+'&comments='+comments+'&is_completed='+is_completed,			
+			    success: function(result){	
+					if(result=="Good Job"){	
+						$("#loading").hide();			
+						//$("#startButton").text(timervalue);	
+						$("#defaultCountdown").countdown('destroy');
+				      	$("#startButton").removeClass('stopDisabledButton'); 
+						$("#startButton").removeAttr("disabled");
+				      	$("#startButton").addClass('playButton'); 
+						$("#sliderbackground").animate({marginTop: "0px"}, 700);	
+						$('#defaultCountdown').text(result);	
+					} else {			
+						$("#loading").hide();
+						$("#defaultCountdown").countdown('destroy');
+				      	$("#startButton").removeClass('stopDisabledButton'); 
+						$("#startButton").removeAttr("disabled");
+				      	$("#startButton").addClass('playButton'); 
+						$("#sliderbackground").animate({marginTop: "0px"}, 700);
+						$('#defaultCountdown').text(result);												
+					}	
+			    }
+			});
+		}
+	});	
+	
+
+	$('#startButton').toggle(function() { 
+			// start the clock
+			rightNow = new Date();
+			month = rightNow.getMonth()+1;
+			var dateString = rightNow.getFullYear()+ "-" + month+ "-" + rightNow.getDate()   + " "
++ rightNow.getHours() + ":" + rightNow.getMinutes() + ":" + rightNow.getSeconds();
+			$("#timerstart").attr("value", dateString); 
+			rightNow.setSeconds(rightNow.getSeconds() -1);
+			$('#defaultCountdown').countdown({since: rightNow, compact: true, format: 'HMS'});
+      		$(this).removeClass('playButton'); 
+      		$(this).addClass('stopButton'); 
+			$("#pauseButton").show();
+        	$('#defaultCountdown').countdown('resume'); 
+			// print out the current time so that we can still see it
+    	},
+    	function() { 
+			// actions when you stop the timer.
+     	   	$('#defaultCountdown').countdown('pause'); 
+			var periods = $('#defaultCountdown').countdown('getTimes');
+			var text = '';
+    		//for (var i = 0; i < periods.length; i++) { 
+				//document.write("<b>periods["+i+"] is </b>=>"+periods[i]+"<br>");
+    		    text += twoDigits(periods[4]) + ':' + twoDigits(periods[5]) + ':' + twoDigits(periods[6]); 
+ 		   //}
+			$('#defaultCountdown').text(text);
+			$("#timervalue").attr("value", text); 
+			$("#startButton").attr("disabled", true);
+      		$("#startButton").removeClass('stopButton'); 
+      		$("#startButton").addClass('stopDisabledButton');
+			$("#pauseButton").hide();
+			endtime = new Date();
+			month = endtime.getMonth()+1;
+			var dateString = endtime.getFullYear()+ "-" + month+ "-" + endtime.getDate()   + " "
++ endtime.getHours() + ":" + endtime.getMinutes() + ":" + endtime.getSeconds();
+			$("#timerend").attr("value", dateString); 
+			$("#sliderbackground").animate({
+					marginTop: "-160px"
+			}, 700);
+    	} 		
+	);
+	
+	//pause button
+	$('#pauseButton').toggle(function() { 
+     	   	$('#defaultCountdown').countdown('pause'); 
+			$("#startButton").attr("disabled", true);
+      		$("#startButton").removeClass('stopButton'); 
+      		$("#startButton").addClass('stopDisabledButton');
+			$("#defaultCountdown").addClass('blink');
+   		}, 
+    	function() { 
+        	$('#defaultCountdown').countdown('resume'); 
+			$("#startButton").removeAttr("disabled");
+      		$("#startButton").removeClass('stopDisabledButton'); 
+      		$("#startButton").addClass('stopButton'); 
+			$("#defaultCountdown").removeClass('blink');
+    	} 
+	);
+	
+	//cancel button
+	$('#cancelButton').click(function() {
+      		$("#startButton").removeClass('stopDisabledButton'); 
+			$("#startButton").removeAttr("disabled");
+      		$("#startButton").addClass('playButton'); 
+			$("#sliderbackground").animate({
+					marginTop: "0px"
+			}, 700);
+	});		
+	
+	//login button
+	/*$('#loginButton').click(function() {
+			// to do -- add working login script
+			$("#login").hide();
+			$("#startButton").addClass('playButton');
+	});	*/	
+});
+
+/* adobe air specific scripts */
+var url = "http://www.adobe.com"; 
+var urlReq = new air.URLRequest(url); 
+air.navigateToURL(urlReq);
+
+function onNativeMove(){ 
+   nativeWindow.startMove(); 
+} 
+function onClose(){ 
+   window.nativeWindow.close(); 
+}
+function onMinimize(){ 
+   window.nativeWindow.minimize(); 
+} 
+</script>
+</head>
+<body>
+<div id="background">
+<a class="drag2" onmousedown="onNativeMove()"></a> 
+<a class="info" href="http://www.razorit.com/" target="_blank"></a>
+<a class="minimize" onclick="onMinimize()"></a>
+<a class="drag" onmousedown="onNativeMove()"></a> 
+<a class="close" onclick="onClose()"></a>
+  <div id="login">
+	<!--<form name="form1" action="http://localhost/cakephp2/projects/allproj" method="post"> -->
+<!--<form name="form1" action="http://zuha.localhost/users/desktop_login" method="post">-->
+		<table>
+			<tr><td colspan="2"  align="center"><span id="message" style="color:#fff; font-size: 13px;font-weight: bold"></span></td></tr>
+		<tr>
+		    <td align="right"><label for="username" class="labeltext">LOGIN:</label></td>
+		    <td align="left"><input id="username" name="data[User][username]" type="text" /></td>
+		</tr>
+		<tr>
+		    <td align="right"><label for="password" class="labeltext">PASSWORD:</label></td>
+		    <td align="left"><input id="password" name="data[User][password]" type="password" /></td>
+		</tr>
+		<tr>
+		    <td align="left">
+                    <!-- a href="/account/lost_password">Lost password</a -->
+			 </td>
+	    <td align="right">
+	        <input type="submit" name="login" value="Login &#187;" id="loginButton" />
+	    </td>
+	</tr>
+	</table>
+		<!-- script type="text/javascript">
+		//<![CDATA[
+		Form.Element.focus('username');
+		//]]>
+		</script -->
+		<!--</form>  -->
+
+  </div>
+
+
+  <div id="postlogin">
+	<div id="defaultCountdown"></div>
+	<select name="projects" id="projectsdropdown">
+		<option value="">-- Select --</option>
+	</select>
+	<select name="tasks" id="tasksdropdown">
+		<option value="">-- Select --</option>
+	</select>
+	<button type="button" id="startButton" class="playButton"></button>
+	<button type="button" id="pauseButton" class="pauseButton"></button>
+  </div>
+  <div id="loading"></div>
+	
+</div>
+
+
+<div id="sliderbackground">
+	
+	<input type="hidden" id="timervalue" value="">
+	<input type="hidden" id="timerstart" value="">
+	<input type="hidden" id="timerend" value="">
+	<input type="hidden" id="user_id" value="">
+	<label for="comments" class="labeltext" id="commentslabel">COMMENTS</label>
+	<textarea name="comments" id="comments"></textarea>
+	<input type="checkbox" name="is_completed" id="is_completed"> <label for="is_completed" class="labeltext" id="iscompletedlabel">TASK COMPLETE</label>
+	<button type="button" id="cancelButton" class="cancelButton"></button>
+	<button type="button" id="submitButton" class="submitButton" onclick="save();"></button>
+	
+	<div id="taskDueDate">Due : Today, 00:00</div>
+	<div id="timeallocated"><span class="labeltext">ALLOWED HOURS:</span> <span id="allocatedTime">00:00</span></div>
+	<div id="timetrackedalready"><span class="labeltext">TRACKED HOURS:</span> <span id="trackedTime">00:00</span></div>
+</div>
+</body>
+</html>

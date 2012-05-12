@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="airDestinationFolder" value="C:\wamp\www\timerapp" />
+	<infoitem key="airDestinationFileName" value="ZuhaDesktop.air" />
+	<infoitem key="airChosenCert" value="C:\wamp\www\timerapp\cert.p12" />
+	<infoitem key="airPackageType" value="packageAIR" />
+	<infoitem key="airRememberPassword" value="true" />
+	<infoitem key="airFilesList" value="images/128.png#images/16.png#images/32.png#images/48.png#images/bg_comments.png#images/btn_addtime.png#images/btn_cancel.png#images/btn_disabled.png#images/btn_pause.png#images/btn_play.png#images/btn_stop.png#images/loading.gif#images/timer-background.png#jquery-countdown.js" />
+	<infoitem key="airFullFilesList" value="index.html#images/128.png#images/16.png#images/32.png#images/48.png#images/bg_comments.png#images/btn_addtime.png#images/btn_cancel.png#images/btn_disabled.png#images/btn_pause.png#images/btn_play.png#images/btn_stop.png#images/loading.gif#images/timer-background.png#jquery-countdown.js" />
+</info>
